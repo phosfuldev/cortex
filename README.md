@@ -10,33 +10,43 @@
 
 <br>
 
-# Model serving at scale
+# Machine learning in production
 
-### Deploy
+Cortex is a scalable, full stack platform for building machine learning systems in production.
 
-* Deploy TensorFlow, PyTorch, ONNX, scikit-learn, and other models.
-* Define preprocessing and postprocessing steps in Python.
-* Configure APIs as realtime or batch.
-* Deploy multiple models per API.
+**Run inference at scale** - Handle production workloads with request-based autoscaling, load balancing, multi-model caching, GPU/ASIC inference, and more.
 
-### Manage
+**Build complex inference pipelines** - Perform real-time and batch inference. Optimize with A/B and multi-armed bandit testing. Integrate with model servers, real-time feature stores, data lakes, and other services.
 
-* Monitor API performance and track predictions.
-* Update APIs with no downtime.
-* Stream logs from APIs.
-* Perform A/B tests.
+**Maintain complete visibility** - Monitor every aspect of your inference pipelines. Reproduce any deployment. Export data to any analytics platform.
 
-### Scale
+**Integrate with your entire stack** - Use any machine learning framework. Trigger deployments in existing CI/CD pipelines. Run Cortex on your AWS account.
 
-* Test locally, scale on your AWS account.
-* Autoscale to handle production traffic.
-* Reduce cost with spot instances.
+**Enjoy machine learning engineering** - Automate DevOps work. Simplify model serving code. Streamline redeployment with live reloading and rolling updates.
 
 <br>
 
-## How it works
+## How to use Cortex
 
-### Write APIs in Python
+### Spin up a Cortex cluster
+
+Spin up a cluster configured for inference with a single command.
+
+```bash
+$ cortex cluster up
+
+confguring networking ...
+configuring logging ...
+configuring metrics ...
+configuring autoscaling ...
+
+cortex is ready!
+```
+
+<br>
+
+
+### Define an inference pipeline
 
 Define any real-time or batch inference pipeline as simple Python APIs, regardless of framework.
 
@@ -55,9 +65,9 @@ class PythonPredictor:
 
 <br>
 
-### Configure infrastructure in YAML
+### Configure a deployment
 
-Configure autoscaling, monitoring, compute resources, update strategies, and more.
+Configure request-based autoscaling, monitoring, compute resources, update strategies, and more in readable YAML.
 
 ```yaml
 # cortex.yaml
@@ -75,9 +85,21 @@ Configure autoscaling, monitoring, compute resources, update strategies, and mor
 
 <br>
 
-### Scale to handle production traffic
+### Deploy to production
 
-Handle traffic with request-based autoscaling. Minimize spend with spot instances and multi-model APIs.
+Containerize your pipeline, deploy it to your cluster, and expose it behind a load balancer with one command.
+
+```bash
+$ cortex deploy
+
+creating text-generator api
+```
+
+<br>
+
+### Monitor and manage deployed pipelines
+
+Stream real-time analytics to monitor performance. Update pipelines with zero downtime via rolling updates and live reloading.
 
 ```bash
 $ cortex get text-generator
@@ -85,60 +107,15 @@ $ cortex get text-generator
 endpoint: https://example.com/text-generator
 
 status   last-update   replicas   requests   latency
-live     10h           10         100000     100ms
+live     10h           150        1823733    74ms
+
+$ cortex deploy
+
+updating text-generator api
 ```
 
 <br>
 
-### Integrate with your stack
-
-Integrate Cortex with any data science platform and CI/CD tooling, without changing your workflow.
-
-```python
-# predictor.py
-
-import tensorflow
-import torch
-import transformers
-import mlflow
-
-...
-```
-
-<br>
-
-### Run on your AWS account
-
-Run Cortex on your AWS account (GCP support is coming soon), maintaining control over resource utilization and data access.
-
-```yaml
-# cluster.yaml
-
-region: us-west-2
-instance_type: g4dn.xlarge
-spot: true
-min_instances: 1
-max_instances: 5
-```
-
-<br>
-
-### Focus on machine learning, not DevOps
-
-You don't need to bring your own cluster or containerize your models, Cortex automates your cloud infrastructure.
-
-```bash
-$ cortex cluster up
-
-confguring networking ...
-configuring logging ...
-configuring metrics ...
-configuring autoscaling ...
-
-cortex is ready!
-```
-
-<br>
 
 ## Get started
 
