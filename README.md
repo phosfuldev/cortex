@@ -12,17 +12,17 @@
 
 # Machine learning in production
 
-Cortex is a scalable, full stack platform for building machine learning systems in production.
+**Run inference at scale** - Request-based autoscaling, load balancing, multi-model caching, GPU/ASIC inference, and more
 
-**Run inference at scale** - Request-based autoscaling, load balancing, multi-model caching, GPU/ASIC inference.
-
-**Build complex inference pipelines** - Real-time and batch inference, A/B and multi-armed bandit testing, support for model servers, real-time feature stores, data lakes, and more.
+**Build complex inference pipelines** - Real-time and batch inference, multi-model pipelines, A/B deployments, support for model servers, and more.
 
 **Maintain complete visibility** - Monitoring, log streaming, reproducible deployments, support for third-party analytics services.
 
 **Integrate with your entire stack** - Hosted on your AWS account, triggerable by CI/CD pipelines, support for all ML frameworks. 
 
 **Enjoy machine learning engineering** - Complete DevOps automation, simple model serving code, streamlined update workflow.
+
+Cortex is a scalable, full stack platform for building machine learning systems in production.
 
 <br>
 
