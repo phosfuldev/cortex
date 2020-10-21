@@ -14,15 +14,15 @@
 
 Cortex is a scalable, full stack platform for building machine learning systems in production.
 
-**Run inference at scale** - Handle production workloads with request-based autoscaling, load balancing, multi-model caching, GPU/ASIC inference, and more.
+**Run inference at scale** - Request-based autoscaling, load balancing, multi-model caching, GPU/ASIC inference.
 
-**Build complex inference pipelines** - Perform real-time and batch inference. Optimize with A/B and multi-armed bandit testing. Integrate with model servers, real-time feature stores, data lakes, and other services.
+**Build complex inference pipelines** - Real-time and batch inference, A/B and multi-armed bandit testing, support for model servers, real-time feature stores, data lakes, and more.
 
-**Maintain complete visibility** - Monitor every aspect of your inference pipelines. Reproduce any deployment. Export data to any analytics platform.
+**Maintain complete visibility** - Monitoring, log streaming, reproducible deployments, support for third-party analytics services.
 
-**Integrate with your entire stack** - Use any machine learning framework. Trigger deployments in existing CI/CD pipelines. Run Cortex on your AWS account.
+**Integrate with your entire stack** - Hosted on your AWS account, triggerable by CI/CD pipelines, support for all ML frameworks. 
 
-**Enjoy machine learning engineering** - Automate DevOps work. Simplify model serving code. Streamline redeployment with live reloading and rolling updates.
+**Enjoy machine learning engineering** - Complete DevOps automation, simple model serving code, streamlined update workflow.
 
 <br>
 
