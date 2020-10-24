@@ -1,0 +1,60 @@
+### Setup ###
+
+1. build and push API images
+
+2. cd dev
+
+3. go build -o dev/load dev/load.go
+
+4. kubectl cp dev/load <operator_pod_name>:/load
+
+5. kubectl cp examples/pytorch/iris-classifier/sample.json <operator_pod_name>:/sample.json
+
+6. kubectl exec -it <operator_pod_name> -- /bin/bash
+
+7. apk add curl bind-tools vim libc6-compat
+
+### To test ###
+
+In another terminal window, repeatedly run: cx delete iris-classifier && sleep 5 && cx deploy
+
+In the operator pod, run ./load http://api-iris-classifier.default.svc.cluster.local:8888/predict sample.json
+
+### observed error ###
+
+Here is the error returned to load.go:
+
+(*url.Error)((Post "http://api-iris-classifier.default.svc.cluster.local:8888/predict": EOF) {
+  Op: (string) (len=4) "Post",
+  URL: (string) (len=65) "http://api-iris-classifier.default.svc.cluster.local:8888/predict",
+  Err: (*errors.errorString)((EOF) {
+    s: (string) (len=3) "EOF"
+  })
+})
+
+Here is the stack trace in the API container:
+
+Traceback (most recent call last):
+  File "/opt/conda/envs/env/lib/python3.6/site-packages/uvicorn/protocols/http/httptools_impl.py", line 390, in run_asgi
+    result = await app(self.scope, self.receive, self.send)
+  File "/opt/conda/envs/env/lib/python3.6/site-packages/uvicorn/middleware/proxy_headers.py", line 45, in __call__
+    return await self.app(scope, receive, send)
+  File "/opt/conda/envs/env/lib/python3.6/site-packages/fastapi/applications.py", line 181, in __call__
+    await super().__call__(scope, receive, send)  # pragma: no cover
+  File "/opt/conda/envs/env/lib/python3.6/site-packages/starlette/applications.py", line 111, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/opt/conda/envs/env/lib/python3.6/site-packages/starlette/middleware/errors.py", line 181, in __call__
+    raise exc from None
+  File "/opt/conda/envs/env/lib/python3.6/site-packages/starlette/middleware/errors.py", line 159, in __call__
+    await self.app(scope, receive, _send)
+  File "/opt/conda/envs/env/lib/python3.6/site-packages/starlette/middleware/base.py", line 25, in __call__
+    response = await self.dispatch_func(request, self.call_next)
+  File "/src/cortex/serve/serve.py", line 173, in parse_payload
+    request.state.payload = await request.json()
+  File "/opt/conda/envs/env/lib/python3.6/site-packages/starlette/requests.py", line 226, in json
+    body = await self.body()
+  File "/opt/conda/envs/env/lib/python3.6/site-packages/starlette/requests.py", line 219, in body
+    async for chunk in self.stream():
+  File "/opt/conda/envs/env/lib/python3.6/site-packages/starlette/requests.py", line 213, in stream
+    raise ClientDisconnect()
+starlette.requests.ClientDisconnect

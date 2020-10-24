@@ -9,3 +9,6 @@
       model: s3://cortex-examples/pytorch/iris-classifier/weights.pth
   monitoring:
     model_type: classification
+  autoscaling:
+    min_replicas: 1
+    max_replicas: 1

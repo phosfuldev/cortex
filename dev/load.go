@@ -25,13 +25,14 @@ import (
 	"os"
 	"time"
 
+	"github.com/cortexlabs/cortex/pkg/lib/debug"
 	"github.com/cortexlabs/cortex/pkg/lib/files"
 )
 
-const _numConcurrent = 5
-const _numRequestsPerThread = -1
+const _numConcurrent = 10
+const _numRequestsPerThread = 200
 const _requestDelay = 0 * time.Second
-const _numMainLoops = 10 // only relevant if _numRequestsPerThread != -1
+const _numMainLoops = 1 // only relevant if _numRequestsPerThread != -1
 
 var _client = &http.Client{
 	Timeout: 600 * time.Second,
@@ -100,13 +101,21 @@ func makeRequestLoop(url string, jsonBytes []byte) {
 		response, _, err := makeRequest(url, jsonBytes)
 
 		if err != nil {
-			fmt.Print(err.Error())
+			fmt.Println()
+			debug.Ppg(err)
 			continue
 		}
 
 		if response.StatusCode != 200 {
-			fmt.Print(response.StatusCode)
-			fmt.Print(" ")
+			fmt.Println("\nstatus code:", response.StatusCode)
+
+			bodyBytes, err := ioutil.ReadAll(response.Body)
+			response.Body.Close()
+			if err != nil {
+				fmt.Println("error reading body:", string(err.Error()))
+			}
+			fmt.Println("body:", string(bodyBytes))
+
 			continue
 		}
 
