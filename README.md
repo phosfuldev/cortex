@@ -15,7 +15,7 @@
 
 Cortex makes it easy to run inference at scale. It abstracts all of the infrastructure needed for running machine learning in production, providing a set of high-level tools for deploying, managing, and scaling inference pipelines.
 
-Some of Cortex's core features include:
+Cortex's core features include:
 
 ### Cluster management
 The Cortex cluster is an easy-to-use, highly configurable Kubernetes cluster provisioned for inference. The Cortex cluster runs on your AWS account, and enables you to:
@@ -25,7 +25,7 @@ The Cortex cluster is an easy-to-use, highly configurable Kubernetes cluster pro
 - Specify compute resources
 - Configure cluster-wide networking and autoscaling
 
-```bash
+```text
 $ cortex cluster up
 
 ￮ configuring networking ✓
@@ -47,7 +47,7 @@ On deploy, Cortex packages/containerizes your inference pipeline, deploying it a
 - Test APIs locally before deploying to production
 - Customize networking and resources on the API level
 
-```bash
+```text
 $ cortex deploy
 
 creating text-generator api
@@ -78,7 +78,7 @@ aws     image-classifier   live       10         2h
 aws     object-detector    live       10         3h
 ```
 
-### Widespread integrations
+### Interoperability
 Cortex is designed to be a modular part of your ML stack. As such, you can:
 
 - Import models from any framework (PyTorch, TensorFlow, ONNX, and more)
@@ -90,7 +90,7 @@ Cortex is designed to be a modular part of your ML stack. As such, you can:
 Once you've [installed Cortex](https://docs.cortex.dev/install), setting up a deployment is straightforward:
 
 ### 1. Configure your cluster
-Cortex configures the cluster according to a YAML manifest in your project directory titled `cluster.yaml`. (Note: Without this manifest, Cortex will spin up a cluster according to its defaults). This manifest provides you with several optional knobs to customize your cluster:
+Cortex configures the cluster according to a YAML manifest named `cluster.yaml`. (Note: Without this manifest, Cortex will spin up a cluster according to defaults). This manifest provides you with several optional knobs to customize your cluster:
 
 ```yaml
 
@@ -111,7 +111,7 @@ spot: true
 You can read the full documentation for `cluster.yaml` [here](https://docs.cortex.dev/cluster-management/config). Once `cluster.yaml` is defined, you can run `$ cortex cluser up` from the project directory and spin up your cluster.
 
 ### 2. Write your inference serving code
-Cortex inference APIs are written in Python according to Cortex's [Predictor Interface](https://docs.cortex.dev/deployments/realtime-api/predictors). Predictors are simple, flexible Python classes that run an `init()` method upon intialization, and serve requests via a `predict()` method. Cortex also exposes hooks for pre and post-processing, as well built-in clients for TensorFlow Serving and ONNX Runtime:
+Cortex inference APIs are written in Python according to Cortex's [Predictor Interface](https://docs.cortex.dev/deployments/realtime-api/predictors). Predictors are simple, flexible Python classes that run an `init()` method upon intialization, and serve requests via a `predict()` method. Cortex also exposes hooks for pre and post-processing, as well as built-in clients for TensorFlow Serving and ONNX Runtime:
 
 ```python
 # predictor.py
@@ -126,10 +126,10 @@ class PythonPredictor:
     return self.model(payload["text"])[0]
 ```
 
-Additionally, you need to create a `requirements.txt` file to specify any dependencies. For an example, see [any of our examples.](https://github.com/cortexlabs/cortex/tree/0.21/examples/pytorch/text-generator)
+Additionally, you need to create a `requirements.txt` file to specify any dependencies. For a demonstration, see [any of our examples.](https://github.com/cortexlabs/cortex/tree/0.21/examples/pytorch/text-generator)
 
 ### 3. Define your inference API
-Just as each cluster has a YAML manifest, each API has one as well. Within your manifest, which we'll call `cortex.yaml`, you can specify the name of your API, the location of your Predictor script, your APIs compute resources, autoscaling behavior, prediction tracking, and more. You can see the [full documentation here.](https://docs.cortex.dev/deployments/realtime-api/api-configuration)
+Just as each cluster has a YAML manifest, each API has one as well. Within your manifest, which we'll call `cortex.yaml`, you can specify the name of your API, the location of your Predictor script, your APIs compute resources, autoscaling behavior, monitoring config, and more. You can see the [full documentation here.](https://docs.cortex.dev/deployments/realtime-api/api-configuration)
 
 ```yaml
 
