@@ -13,7 +13,7 @@
 
 ## Deploy machine learning to production
 
-Cortex makes it easy to run inference at production scale. It abstracts all of the underlying infrastructure needed for running machine learning in production, providing a set of high-level tools for deploying, managing, and scaling inference pipelines.
+Cortex makes it easy to run inference at scale. It abstracts all of the infrastructure needed for running machine learning in production, providing a set of high-level tools for deploying, managing, and scaling inference pipelines.
 
 Some of Cortex's core features include:
 
@@ -37,7 +37,7 @@ cortex is ready!
 ```
 
 ### Deployment automation
-On deploy, Cortex automatically packages and containerizes your inference pipeline and its dependencies, deploying your pipeline as an API on the cluster. With a Cortex deployment, you can: 
+On deploy, Cortex packages/containerizes your inference pipeline, deploying it as an API on the cluster. With a Cortex deployment, you can: 
 
 - Deploy realtime or batch APIs
 - Scale to handle production traffic with request-based autoscaling
@@ -67,7 +67,7 @@ Cortex automatically configures CloudWatch and sets up monitoring for your pipel
 - Integrate with 3rd party analytics platforms
 - Customize prediction tracking
 
-```bash
+```text
 $ cortex get
 
 env     api                status     replicas   last update
@@ -84,7 +84,7 @@ Cortex is designed to be a modular part of your ML stack. As such, you can:
 - Import models from any framework (PyTorch, TensorFlow, ONNX, and more)
 - Connect with any training platform
 - Trigger deployments as part of your CI/CD pipeline
-- Integrate any tool (model servers, realtime feature stores, etc.) in your inference pipeline
+- Use any tools to run inference (model servers, realtime feature stores, etc.)
 
 ## Quickstart
 Once you've [installed Cortex](https://docs.cortex.dev/install), setting up a deployment is straightforward:
@@ -129,7 +129,7 @@ class PythonPredictor:
 Additionally, you need to create a `requirements.txt` file to specify any dependencies. For an example, see [any of our examples.](https://github.com/cortexlabs/cortex/tree/0.21/examples/pytorch/text-generator)
 
 ### 3. Define your inference API
-Just as each cluster has a YAML manifest, each API has one as well. Within `cortex.yaml`, you can specify basic things ilke the name of your API and the location of your Predictor script, but you can also customize your APIs compute resources, autoscaling behavior, prediction tracking, and more. You can see the [full documentation here.](https://docs.cortex.dev/deployments/realtime-api/api-configuration)
+Just as each cluster has a YAML manifest, each API has one as well. Within your manifest, which we'll call `cortex.yaml`, you can specify the name of your API, the location of your Predictor script, your APIs compute resources, autoscaling behavior, prediction tracking, and more. You can see the [full documentation here.](https://docs.cortex.dev/deployments/realtime-api/api-configuration)
 
 ```yaml
 
